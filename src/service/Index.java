@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Index
  */
-@WebServlet("/Index")
+@WebServlet("/index")
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,8 +28,18 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    RequestDispatcher dispatcher = request.getRequestDispatcher ("pages/header.jsp?content=first");
-        dispatcher.forward(request, response);
+	    System.out.println("hello");
+	    String content = request.getParameter("content");
+	    if(content==null)
+	        content="findBusArriveTime";
+	    RequestDispatcher dispatcher;
+	    if(content.equals("findBusArriveTime"))
+	        dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
+	    else if(content.equals("findAvalaibleBicycle"))
+            dispatcher= request.getRequestDispatcher ("index.jsp?content=findAvalaibleBicycle");
+	    else
+            dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
+	    dispatcher.forward(request, response);
 	}
 
 	/**
