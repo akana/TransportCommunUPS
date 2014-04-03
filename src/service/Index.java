@@ -3,6 +3,7 @@ package service;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import model.arrete_ups.Stops;
 import model.velo_toulouse.Station;
 
 import javax.servlet.RequestDispatcher;
@@ -41,8 +42,29 @@ public class Index extends HttpServlet {
 	    if(content==null)
 	        content="findBusArriveTime";
 	    RequestDispatcher dispatcher;
-	    if(content.equals("findBusArriveTime"))
+	    if(content.equals("findBusArriveTime")){
+	    	ArrayList<Stops> stops = new ArrayList<Stops>();
+	    	String data = RetrieveHTTPData.getHTTPData("http://pt.data.tisseo.fr/stopPointsList?bbox=1.4512%2C43.5595%2C1.4651%2C43.57361&key=a03561f2fd10641d96fb8188d209414d8");
+	    	JSONArray dataArray;
+	    	try {
+                dataArray = new JSONArray(data);
+            
+    	        JSONObject temp;
+    	        for(int i=0;i<dataArray.length();i++){
+    	            temp=dataArray.getJSONObject(i);
+    	            stops.add(
+    	                    new Stops( 
+    	                            temp.getString("name")
+    	                            )
+    	                    );
+    	        }
+	    	}catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                request.setAttribute("stops", stops);
 	        dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
+	    }
 	    else if(content.equals("findAvalaibleBicycle")){
 	        ArrayList<Station> stations = new ArrayList<Station>();
 	        String data = RetrieveHTTPData.getHTTPData("https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=06332805f697b637331587197aca029cf3d1ab12");
