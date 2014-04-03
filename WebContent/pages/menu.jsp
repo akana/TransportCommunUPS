@@ -13,7 +13,7 @@
         	<a href="#"><span>Comparer les moyens</span></a>
         </li>
         <li class="last">
-        	<a href="index?content=findAvalaibleBicycle"><span>Chercher les vélo disponibles</span></a>
+        	<a href="availableBicycle"><span>Chercher les vélo disponibles</span></a>
         </li>
     </ul>
 </div>

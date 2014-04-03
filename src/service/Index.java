@@ -44,7 +44,7 @@ public class Index extends HttpServlet {
 	    RequestDispatcher dispatcher;
 	    if(content.equals("findBusArriveTime")){
 	    	ArrayList<Stops> stops = new ArrayList<Stops>();
-	    	String data = RetrieveHTTPData.getHTTPData("http://pt.data.tisseo.fr/stopPointsList?bbox=1.4512%2C43.5595%2C1.4651%2C43.57361&key=a03561f2fd10641d96fb8188d209414d8");
+	    	String data = RetrieveHTTPData.getHTTPData("http://pt.data.tisseo.fr/stopPointsList?format=json&bbox=1.4512%2C43.5595%2C1.4651%2C43.57361&key=a03561f2fd10641d96fb8188d209414d8");
 	    	JSONArray dataArray;
 	    	try {
                 dataArray = new JSONArray(data);
@@ -66,38 +66,6 @@ public class Index extends HttpServlet {
 	        dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
 	    }
 	    else if(content.equals("findAvalaibleBicycle")){
-	        ArrayList<Station> stations = new ArrayList<Station>();
-	        String data = RetrieveHTTPData.getHTTPData("https://api.jcdecaux.com/vls/v1/stations?contract=Toulouse&apiKey=06332805f697b637331587197aca029cf3d1ab12");
-	        JSONArray dataArray;
-            try {
-                dataArray = new JSONArray(data);
-            
-    	        JSONObject temp;
-    	        for(int i=0;i<dataArray.length();i++){
-    	            temp=dataArray.getJSONObject(i);
-    	            stations.add(
-    	                    new Station( 
-    	                            temp.getInt("number"),
-    	                            temp.getString("name"),
-    	                            temp.getString("address"),
-    	                            temp.getJSONObject("position").getDouble("lat"),
-    	                            temp.getJSONObject("position").getDouble("lng"),
-    	                            temp.getBoolean("banking"),
-    	                            temp.getBoolean("bonus"),
-    	                            temp.getString("status"),
-    	                            temp.getString("contract_name"),
-    	                            temp.getInt("bike_stands"),
-    	                            temp.getInt("available_bike_stands"),
-    	                            temp.getInt("available_bikes"),
-    	                            temp.getLong("last_update")
-    	                            )
-    	                    );
-    	        }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            request.setAttribute("stations", stations);
 	        dispatcher= request.getRequestDispatcher ("index.jsp?content=findAvalaibleBicycle");
 	    }else
             dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
