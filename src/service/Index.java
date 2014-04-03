@@ -3,7 +3,7 @@ package service;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import model.arrete_ups.Stops;
+import model.tisseo.Stops;
 import model.velo_toulouse.Station;
 
 import javax.servlet.RequestDispatcher;
