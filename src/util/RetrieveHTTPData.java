@@ -18,7 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RetrieveHTTPDate
+public class RetrieveHTTPData
 {       
      
     public static String getHTTPData(String url) throws ClientProtocolException, IOException
@@ -56,16 +56,6 @@ public class RetrieveHTTPDate
     }
     
     public static void main(String[] args){
-        try {
-            String data = getHTTPData("http://pt.data.tisseo.fr/linesList?format=json&key=a03561f2fd10641d96fb8188d209414d8");
-            JSONObject dataObj = new JSONObject(data);
-            System.out.println(dataObj.getString("expirationDate"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
     }
 }
