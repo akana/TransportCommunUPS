@@ -14,7 +14,7 @@
 <%
 if(request.getParameter("content").equals("findBusArriveTime")){
 %>
-	<%@ include file="pages/arriveBus.jsp" %>    
+	<%@ include file="pages/findBusArriveTime.jsp" %>    
 	
 <%
 }else if(request.getParameter("content").equals("findAvalaibleBicycle")){

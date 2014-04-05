@@ -3,7 +3,7 @@ package service;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import model.tisseo.Stops;
+import model.tisseo.ArriveBM;
 import model.velo_toulouse.Station;
 
 import javax.servlet.RequestDispatcher;
@@ -37,35 +37,14 @@ public class Index extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String content = request.getParameter("content");
-	    if(content==null)
-	        content="findBusArriveTime";
-	    RequestDispatcher dispatcher;
-	    if(content.equals("findBusArriveTime")){
-	    	ArrayList<Stops> stops = new ArrayList<Stops>();
-	    	String data = RetrieveHTTPData.getHTTPData("http://pt.data.tisseo.fr/stopPointsList?format=json&bbox=1.4512%2C43.5595%2C1.4651%2C43.57361&key=a03561f2fd10641d96fb8188d209414d8");
-	    	JSONArray dataArray;
-	    	try {
-                dataArray = new JSONArray(data);
-            
-    	        JSONObject temp;
-    	        for(int i=0;i<dataArray.length();i++){
-    	            temp=dataArray.getJSONObject(i);
-    	            stops.add(
-    	                    new Stops( 
-    	                            temp.getString("name")
-    	                            )
-    	                    );
-    	        }
-	    	}catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                request.setAttribute("stops", stops);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String content = request.getParameter("content");
+        if(content==null)
+            content="findBusArriveTime";
+        RequestDispatcher dispatcher;
+        if(content.equals("findBusArriveTime")){
 	        dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
-	    }
-	    else if(content.equals("findAvalaibleBicycle")){
+		}else if(content.equals("findAvalaibleBicycle")){
 	        dispatcher= request.getRequestDispatcher ("index.jsp?content=findAvalaibleBicycle");
 	    }else
             dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
