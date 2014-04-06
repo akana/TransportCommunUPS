@@ -1,10 +1,10 @@
 <div id="menu">
     <ul class="menu">
         <li>
-        	<a href="index?content=findBusArriveTime"><span>Home</span></a>
+        	<a href="arriveTimeBusMetro"><span>Home</span></a>
         </li>
         <li>
-        	<a href="index?content=findBusArriveTime"><span>Temps arrivé de bus</span></a>
+        	<a href="arriveTimeBusMetro"><span>Temps arrivé de bus</span></a>
         </li>
         <li>
         	<a href="#"><span>Évaluer les lignes</span></a>

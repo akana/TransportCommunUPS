@@ -2,7 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<form method="GET" action="arriveTime">
+<form method="GET" action="arriveTimeBusMetro">
 			<input type="radio" name="searchBM" value="radio">BUS:Université Paul Sabatier<br/>
 			<input type="radio" name="searchBM" value="radio">METRO:Université Paul Sabatier<br/>
 			<input type="submit" value="Submit">
@@ -15,7 +15,6 @@ pageEncoding="UTF-8"%>
 	<thead>
 		<tr>
 			<th>Numéro</th>
-			<th>Nom</th>
 			<th>Time</th>
 			
 		</tr>
@@ -26,9 +25,9 @@ pageEncoding="UTF-8"%>
 		for(ArriveBM d : departure){
 		    out.print("<tr>");
 		    out.println("<td>"+d.getNumber()+"</td>");
-		    out.println("<td>"+d.getName()+"</td>");
 		    out.println("<td>"+d.getTime()+"</td>");
 		    out.print("</tr>");
+
 		}
 		%>
 	</tbody>
