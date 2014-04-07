@@ -37,6 +37,10 @@ public class ArriveTimeBusMetro extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String lineToSearch = request.getParameter("search");
+        if(lineToSearch==null){
+        	lineToSearch="";
+        }
 		String data = RetrieveHTTPData.getHTTPData("http://pt.data.tisseo.fr/departureBoard?stopPointId=1970324837185012&format=json&key=a03561f2fd10641d96fb8188d209414d8");
 		ArrayList<ArriveBM> arriveBM = new ArrayList<ArriveBM>();
 		
@@ -44,19 +48,35 @@ public class ArriveTimeBusMetro extends HttpServlet {
 			String lineName="";
 			try {
 				jsonObject = new JSONObject(data);
-				for(int i=0; i<jsonObject.length(); i++){
-					
+				if(lineToSearch.equals("")){
+				for(int i=0; i<jsonObject.length(); i++){					
 					JSONObject stopAreaObject = jsonObject.getJSONObject("departures");
 					JSONArray departureArray = stopAreaObject.getJSONArray("departure");
 					for(int j=0; j<departureArray.length()-1; j++){
 						JSONObject departureObject = departureArray.getJSONObject(0);
-						String arriveTime = departureObject.getString("dateTime");
-						
+						String arriveTime = departureObject.getString("dateTime");					
 						JSONObject lineObject = departureArray.getJSONObject(j).getJSONObject("line");
-						lineName = lineObject.getString("shortName");
+						lineName = lineObject.getString("shortName");			
 						arriveBM.add(new ArriveBM(lineName, arriveTime));
 					}
 					
+				}
+				}else {
+					for(int i=0; i<jsonObject.length(); i++){		
+						JSONObject stopAreaObject = jsonObject.getJSONObject("departures");
+						JSONArray departureArray = stopAreaObject.getJSONArray("departure");
+						for(int j=0; j<departureArray.length()-1; j++){
+							JSONObject departureObject = departureArray.getJSONObject(0);
+							String arriveTime = departureObject.getString("dateTime");
+							
+							JSONObject lineObject = departureArray.getJSONObject(j).getJSONObject("line");
+							lineName = lineObject.getString("shortName");
+							if(lineName.equals(lineToSearch))
+							arriveBM.add(new ArriveBM(lineName, arriveTime));
+						}
+						
+					}
+
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

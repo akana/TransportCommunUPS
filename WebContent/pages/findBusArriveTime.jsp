@@ -3,9 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <form method="GET" action="arriveTimeBusMetro">
-			<input type="radio" name="searchBM" value="radio">BUS:Université Paul Sabatier<br/>
-			<input type="radio" name="searchBM" value="radio">METRO:Université Paul Sabatier<br/>
-			<input type="submit" value="Submit">
+			<input type="text" placeholder="Numero de ligne" name="search">
+			<input type="submit" value="Search">
 </form>
 		
 		
