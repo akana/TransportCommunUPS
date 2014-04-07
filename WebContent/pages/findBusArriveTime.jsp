@@ -15,6 +15,7 @@ pageEncoding="UTF-8"%>
 		<tr>
 			<th>Numéro</th>
 			<th>Time</th>
+			<th>Destination</th>
 			
 		</tr>
 	</thead>
@@ -25,6 +26,7 @@ pageEncoding="UTF-8"%>
 		    out.print("<tr>");
 		    out.println("<td>"+d.getNumber()+"</td>");
 		    out.println("<td>"+d.getTime()+"</td>");
+		    out.println("<td>"+d.getDestination()+"</td>");
 		    out.print("</tr>");
 
 		}

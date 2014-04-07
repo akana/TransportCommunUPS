@@ -46,34 +46,46 @@ public class ArriveTimeBusMetro extends HttpServlet {
 		
 			JSONObject jsonObject;
 			String lineName="";
+			
+			String destination="";
 			try {
 				jsonObject = new JSONObject(data);
 				if(lineToSearch.equals("")){
-				for(int i=0; i<jsonObject.length(); i++){					
+				for(int i=0; i<jsonObject.length()-1; i++){					
 					JSONObject stopAreaObject = jsonObject.getJSONObject("departures");
 					JSONArray departureArray = stopAreaObject.getJSONArray("departure");
 					for(int j=0; j<departureArray.length()-1; j++){
-						JSONObject departureObject = departureArray.getJSONObject(0);
-						String arriveTime = departureObject.getString("dateTime");					
+						JSONObject departureObject = departureArray.getJSONObject(j);
+						String arriveTime = departureObject.getString("dateTime");
+						
 						JSONObject lineObject = departureArray.getJSONObject(j).getJSONObject("line");
-						lineName = lineObject.getString("shortName");			
-						arriveBM.add(new ArriveBM(lineName, arriveTime));
+						lineName = lineObject.getString("shortName");
+						
+						JSONArray destinationArray = departureObject.getJSONArray("destination");
+						JSONObject destinationObject = destinationArray.getJSONObject(0);
+						destination = destinationObject.getString("name");
+						arriveBM.add(new ArriveBM(lineName, arriveTime,destination));
+						
 					}
 					
 				}
 				}else {
-					for(int i=0; i<jsonObject.length(); i++){		
+					for(int i=0; i<jsonObject.length()-1; i++){		
 						JSONObject stopAreaObject = jsonObject.getJSONObject("departures");
 						JSONArray departureArray = stopAreaObject.getJSONArray("departure");
 						for(int j=0; j<departureArray.length()-1; j++){
-							JSONObject departureObject = departureArray.getJSONObject(0);
+							JSONObject departureObject = departureArray.getJSONObject(j);
 							String arriveTime = departureObject.getString("dateTime");
 							
 							JSONObject lineObject = departureArray.getJSONObject(j).getJSONObject("line");
 							lineName = lineObject.getString("shortName");
+							
+							JSONArray destinationArray = departureObject.getJSONArray("destination");
+							JSONObject destinationObject = destinationArray.getJSONObject(0);
+							destination = destinationObject.getString("name");
 							if(lineName.equals(lineToSearch))
-							arriveBM.add(new ArriveBM(lineName, arriveTime));
-						}
+								arriveBM.add(new ArriveBM(lineName, arriveTime,destination));
+							}
 						
 					}
 
