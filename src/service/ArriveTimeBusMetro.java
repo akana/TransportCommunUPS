@@ -15,7 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import model.tisseo.ArriveBM;
-import model.velo_toulouse.Station;
+
 import util.RetrieveHTTPData;
 
 /**
@@ -43,7 +43,6 @@ public class ArriveTimeBusMetro extends HttpServlet {
         }
 		String data = RetrieveHTTPData.getHTTPData("http://pt.data.tisseo.fr/departureBoard?stopPointId=1970324837185012&format=json&key=a03561f2fd10641d96fb8188d209414d8");
 		ArrayList<ArriveBM> arriveBM = new ArrayList<ArriveBM>();
-		
 			JSONObject jsonObject;
 			String lineName="";
 			

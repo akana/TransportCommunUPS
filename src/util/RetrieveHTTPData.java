@@ -56,6 +56,15 @@ public class RetrieveHTTPData
     }
     
     public static void main(String[] args){
-
+    	try {
+			String test = getHTTPData("http://Ziyan:0917@localhost:5984");
+			System.out.println(test);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
