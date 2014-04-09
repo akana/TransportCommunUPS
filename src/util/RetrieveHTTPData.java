@@ -13,6 +13,8 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,16 +57,18 @@ public class RetrieveHTTPData
         return "";
     }
     
+    public static void postHTTPData(String url, String data) throws ClientProtocolException, IOException
+    {
+        HttpClient httpClient=null;
+        httpClient = HttpClientBuilder.create().build();
+        HttpPost httpPost = new HttpPost(url);
+        StringEntity params =new StringEntity(data);
+        httpPost.addHeader("content-type", "application/json");
+        httpPost.setEntity(params);
+        httpClient.execute(httpPost);
+    }
+    
     public static void main(String[] args){
-    	try {
-			String test = getHTTPData("http://Ziyan:0917@localhost:5984");
-			System.out.println(test);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
     }
 }
