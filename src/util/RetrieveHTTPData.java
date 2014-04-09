@@ -14,6 +14,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
@@ -66,6 +67,17 @@ public class RetrieveHTTPData
         httpPost.addHeader("content-type", "application/json");
         httpPost.setEntity(params);
         httpClient.execute(httpPost);
+    }
+    
+    public static void putHTTPData(String url, String data) throws ClientProtocolException, IOException
+    {
+        HttpClient httpClient=null;
+        httpClient = HttpClientBuilder.create().build();
+        HttpPut httpPut = new HttpPut(url);
+        StringEntity params =new StringEntity(data);
+        httpPut.addHeader("content-type", "application/json");
+        httpPut.setEntity(params);
+        httpClient.execute(httpPut);
     }
     
     public static void main(String[] args){
