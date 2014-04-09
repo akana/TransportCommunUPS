@@ -6,18 +6,19 @@
 	<%@ include file="pages/header.jsp" %>  
 </head>
 <body>
-<img src="images/logo.jpg" style="clear: both;display: block;margin:20px auto;">
-<br><br>
-
+<img src="images/logo.jpg" style="clear: both;display: block;margin:auto;">
 <%@ include file="pages/menu.jsp" %>  
 
 <%
-if(request.getParameter("content").equals("findBusArriveTime")){
+String content = request.getParameter("content");
+if(content==null)
+    content = "findBusArriveTime";
+if(content.equals("findBusArriveTime")){
 %>
 	<%@ include file="pages/findBusArriveTime.jsp" %>    
 	
 <%
-}else if(request.getParameter("content").equals("findAvalaibleBicycle")){
+}else if(content.equals("findAvalaibleBicycle")){
 %>
 	<%@ include file="pages/findAvalaibleBicycle.jsp" %>    
 <%

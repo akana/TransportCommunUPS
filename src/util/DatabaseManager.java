@@ -150,11 +150,11 @@ public class DatabaseManager {
     
     public static void main(String[] args){
 //        instance.lineLike("3da2a71b63f52f1493babbf1ba006ac0","1-54c7a40fbd558de821ea6950da441d2f");
-        instance.lineUnlike("3da2a71b63f52f1493babbf1ba006ac0","2-851a162937b3c3cd16ca6ddd7671da38");
+//        instance.lineUnlike("3da2a71b63f52f1493babbf1ba006ac0","2-851a162937b3c3cd16ca6ddd7671da38");
         for(LineEvaluation line : instance.getAllLineInfo()){
             System.out.println("line num: "+line.getLineNumber());
-            System.out.println("like: "+line.getNumLike());
-            System.out.println();
+//            System.out.println("like: "+line.getNumLike());
+//            System.out.println();
         }
         
         

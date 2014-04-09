@@ -3,7 +3,7 @@
   <display-name>Transport en Commun l'UPS</display-name>
   <description></description>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>availableBicycle</welcome-file>
   </welcome-file-list>
 <context-param>
     <param-name>log4jConfigLocation</param-name>
