@@ -15,7 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import model.tisseo.ArriveBM;
-
+import model.tisseo.LineEvaluation;
+import util.DatabaseManager;
 import util.RetrieveHTTPData;
 
 /**
@@ -93,7 +94,9 @@ public class ArriveTimeBusMetro extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			ArrayList<LineEvaluation> lines = new ArrayList<LineEvaluation>();
+			lines = DatabaseManager.instance.getAllLineInfo();
+			request.setAttribute("linesInfo", lines);
 			request.setAttribute("departure", arriveBM);
 	        RequestDispatcher dispatcher= request.getRequestDispatcher ("index.jsp?content=findBusArriveTime");
 	        dispatcher.forward(request, response);
